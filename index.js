@@ -29,13 +29,13 @@ async function run() {
     
     app.get('/', (req, res) => res.send('Hello World!'));
 
-    // All packages
+   
     app.get('/Packages', async (req, res) => {
       const result = await PackagesCollection.find().toArray();
       res.send(result);
     });
 
-    // Add new package
+
     app.post("/Packages", async (req, res) => {
       const data = req.body;
       data.createdAt = new Date();
@@ -49,7 +49,7 @@ async function run() {
       res.send(result);
     });
 
-    // Single package by ID
+   
     app.get("/Packages/:id", async (req, res) => {
       const id = req.params.id;
       const result = await PackagesCollection.findOne({ _id: new ObjectId(id) });
@@ -57,7 +57,7 @@ async function run() {
       res.send({ success: true, result });
     });
 
-    // Get packages by logged-in user
+  
     app.get("/my-packages", async (req, res) => {
       const email = req.query.email;
       if (!email) return res.status(400).send({ error: "Missing email" });
@@ -83,7 +83,7 @@ async function run() {
       res.send({ success: result.modifiedCount > 0 });
     });
 
-    // Start server
+    
     app.listen(port, () => console.log(`Server running on port ${port}`));
   } catch (err) {
     console.error(err);
